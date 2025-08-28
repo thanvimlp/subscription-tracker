@@ -1,0 +1,8 @@
+import { config } from "dotenv";
+
+config({ path: `.env.${process.env.NODE_ENV || "development"}.local` });
+//process.env.NODE_ENV is a special variable that tells you which environment the app is running in
+//"development" .env.development
+//"production"
+//"test"
+export const { PORT, NODE_ENV } = process.env;
