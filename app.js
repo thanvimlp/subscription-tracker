@@ -11,11 +11,14 @@ import connectToDatabase from "./database/mongodb.js";
 
 import errorMiddleware from "./middlewares/error.middleware.js";
 
+import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(arcjetMiddleware);
 
 //we will have doubt the when we put / in all the router it may clash for that , the /api/v1/auth/ is used as endpoint
 
