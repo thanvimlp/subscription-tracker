@@ -18,6 +18,7 @@ export const sendRemainders = serve(async (context) => {
   const renewalDate = dayjs(subscription.renewalDate);
 
   if (renewalDate.isBefore(dayjs())) {
+    //returns current date and time
     console.log(
       `Renewal date has passed for subscription ${subscriptionId}. Stopping workflow.`
     );
@@ -25,7 +26,7 @@ export const sendRemainders = serve(async (context) => {
   }
   for (const daysBefore of REMINDERS) {
     const remainderDate = renewalDate.subtract(daysBefore, "day");
-    //example: renewal 22 feb 2023 , daysBefore = 7 , remainderDate = 15 feb 2023
+    //example: renewal 22 feb 2023 , daysBefore = 7 , remainderDate = 15 feb 2023, 17,20,21
     if (remainderDate.isAfter(dayjs())) {
       await sleepUntilRemainder(
         context,
@@ -38,7 +39,7 @@ export const sendRemainders = serve(async (context) => {
 });
 
 const fetchSubscription = async (context, subscriptionId) => {
-  return await context.run("get subscription", () => {
+  return await context.run("get subscription", async () => {
     return Subscription.findById(subscriptionId).populate("user", "name email");
   });
 };

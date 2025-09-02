@@ -3,6 +3,6 @@ import { sendRemainders } from "../controllers/workflow.controller.js";
 
 const workflowRouter = Router();
 
-workflowRouter.post("/", sendRemainders);
+workflowRouter.post("/subscription/reminder", sendRemainders);
 
 export default workflowRouter;
